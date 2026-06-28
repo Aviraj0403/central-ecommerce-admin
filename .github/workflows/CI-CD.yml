@@ -1,0 +1,49 @@
+name: CI/CD Pipeline for GKStore Admin
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy GKStore Admin to VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no root@72.61.174.82 "
+            # Load NVM so npm & pm2 work
+            export NVM_DIR=\"/root/.nvm\"
+            source \"\$NVM_DIR/nvm.sh\"
+
+            # Navigate to admin project
+            cd /var/www/GKStore/gkstore-admin &&
+
+            # Pull latest code
+            git pull origin main &&
+
+            # Install dependencies (CI-friendly)
+            npm ci &&
+
+            # Build project (if applicable)
+            npm run build &&
+
+            # Restart or start PM2 process
+            pm2 restart gkstore-admin 
+
+            # Save PM2 process list
+            pm2 save
+          "

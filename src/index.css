@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── GK-STORE Premium Cosmetics & Wellness Palette ── */
+  --color-orange-50:  #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+  --color-orange-800: #9a3412;
+  --color-orange-900: #7c2d12;
+
+  --color-gold-50:  #fffbf0;
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #f5c842;
+  --color-gold-500: #d4a017;
+  --color-gold-600: #b8860b;
+  --color-gold-700: #9a6f09;
+  --color-gold-800: #7c5807;
+  --color-gold-900: #5e4205;
+
+  --color-cream-50:  #fefcf9;
+  --color-cream-100: #fdf8f0;
+  --color-cream-200: #faf0e0;
+  --color-cream-300: #f5e4c8;
+  --color-cream-400: #edd4a8;
+  --color-cream-500: #e0be82;
+  --color-cream-600: #c9a05e;
+  --color-cream-700: #a8823e;
+  --color-cream-800: #8a6628;
+  --color-cream-900: #6e4e18;
+}
+
+/* ── Global Reset & Base ── */
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #fafafa;
+  color: #1c1917;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #f97316, #c2410c); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #ea580c; }
+
+/* ── Sidebar Gradient ── */
+.sidebar-gradient {
+  background: linear-gradient(180deg, #0c0a09 0%, #1c1917 35%, #292524 70%, #44210f 100%);
+}
+
+/* ── Premium Gradient Utilities ── */
+.orange-gradient {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #c2410c 100%);
+}
+.gold-gradient {
+  background: linear-gradient(135deg, #f5c842 0%, #d4a017 50%, #b8860b 100%);
+}
+.cream-gradient {
+  background: linear-gradient(135deg, #fefcf9 0%, #faf0e0 50%, #f5e4c8 100%);
+}
+
+/* ── Glass Card ── */
+.glass-card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(249,115,22,0.08);
+  box-shadow: 0 4px 32px rgba(194,65,12,0.05);
+}
+
+/* ── Premium Card ── */
+.premium-card {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.premium-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(194,65,12,0.1);
+}
+
+/* ── Shimmer Loading ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, #faf0e0 25%, #fefcf9 50%, #faf0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ── Input Focus ── */
+.premium-input:focus {
+  outline: none;
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.15);
+}
+
+/* ── Global Shadcn UI Design System Overrides ── */
+
+/* Cards and Panels */
+.bg-white.rounded-lg.border,
+.bg-white.rounded-xl.border,
+.bg-white.rounded-3xl.border,
+.order-card {
+  border-color: #e4e4e7 !important; /* zinc-200 */
+  border-radius: 0.75rem !important; /* rounded-xl */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important; /* shadow-sm */
+}
+
+/* Tables Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead,
+tr.bg-orange-50,
+thead.bg-gradient-to-r,
+tr.bg-gradient-to-r {
+  background: #f4f4f5 !important; /* zinc-100 */
+}
+
+thead th,
+table th {
+  color: #3f3f46 !important; /* zinc-700 */
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  border-bottom: 1px solid #e4e4e7 !important;
+  padding: 0.75rem 1rem !important;
+}
+
+table td,
+tbody td {
+  padding: 0.75rem 1rem !important;
+  color: #27272a !important; /* zinc-800 */
+  font-size: 13px !important;
+  border-bottom: 1px solid #f4f4f5 !important;
+}
+
+tbody tr:hover,
+tr.hover\:bg-orange-50:hover,
+tr.hover\:bg-orange-100:hover {
+  background-color: #fafafa !important;
+}
+
+/* Inputs & Form Controls */
+select,
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="email"],
+input[type="password"] {
+  border: 1px solid #e4e4e7 !important; /* zinc-200 */
+  border-radius: 0.5rem !important; /* rounded-lg */
+  padding: 0.5rem 0.75rem !important;
+  font-size: 12px !important;
+  background-color: #ffffff !important;
+  color: #09090b !important;
+  transition: all 0.2s ease;
+  outline: none !important;
+}
+
+select:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #f97316 !important; /* Brand orange accent */
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.1) !important;
+}
+
+/* Badges Styling */
+span.badge,
+span.bg-orange-100,
+span.bg-green-100,
+span.bg-red-100,
+span.bg-blue-100 {
+  border-radius: 9999px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.025em !important;
+  padding: 0.25rem 0.625rem !important;
+}
+
+/* Buttons Styling */
+button,
+a.button {
+  transition: all 0.2s ease !important;
+}
+button:active {
+  transform: scale(0.98) !important;
+}
+
+button.bg-gray-300,
+button.bg-gray-200 {
+  background-color: #f4f4f5 !important;
+  color: #27272a !important;
+  border: 1px solid #e4e4e7 !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 1rem !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+  cursor: pointer !important;
+}
+
+button.bg-gray-300:hover:not(:disabled),
+button.bg-gray-200:hover:not(:disabled) {
+  background-color: #e4e4e7 !important;
+  color: #09090b !important;
+}
+
+button:disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+}
