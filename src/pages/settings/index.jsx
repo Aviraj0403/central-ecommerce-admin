@@ -21,6 +21,7 @@ import TeamTab from './TeamTab';
 import CreateAdminModal from './CreateAdminModal';
 import RolesTab from './RolesTab';
 import SuperAdminTab from './SuperAdminTab';
+import IntegrationsTab from './IntegrationsTab';
 
 export default function SettingsPage() {
   const { user: currentUser } = useAuth();
@@ -188,6 +189,7 @@ export default function SettingsPage() {
   const TABS = [
     { id: 'logistics', label: 'Logistics Gateways', icon: <Truck size={16} />, color: 'orange' },
     ...(isSuperAdmin ? [
+      { id: 'integrations', label: 'Integrations & API', icon: <Settings size={16} />, color: 'blue' },
       { id: 'team', label: 'Team Console', icon: <Users size={16} />, color: 'indigo' },
       { id: 'roles', label: 'Role Management', icon: <ShieldAlert size={16} />, color: 'indigo' },
       { id: 'security', label: 'Security & Access', icon: <ShieldCheck size={16} />, color: 'emerald' }
@@ -301,6 +303,13 @@ export default function SettingsPage() {
                </div>
              </div>
            </div>
+          )}
+
+         {activeTab === 'integrations' && (
+           <IntegrationsTab 
+             settings={settings}
+             setSettings={setSettings}
+           />
          )}
  
          {activeTab === 'team' && (

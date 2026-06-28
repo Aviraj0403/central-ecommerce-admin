@@ -144,72 +144,10 @@ const OnboardTenant = () => {
             </div>
           </div>
 
-          {/* MODULES */}
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
-            <SectionTitle title="3. Modules" subtitle="Enable or disable features for this store" />
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {Object.entries(form.modules).map(([key, val]) => (
-                <label key={key} className="flex items-center gap-3 cursor-pointer p-3 rounded-xl bg-gray-700/40 hover:bg-gray-700/60 border border-gray-600/50">
-                  <div onClick={() => set(`modules.${key}`, !val)} className={`w-9 h-5 rounded-full transition-colors relative ${val ? 'bg-purple-600' : 'bg-gray-600'}`}>
-                    <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${val ? 'translate-x-4' : 'translate-x-0.5'}`} />
-                  </div>
-                  <span className={`text-sm capitalize ${val ? 'text-white' : 'text-gray-500'}`}>{key}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* FEATURES */}
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/5 rounded-full blur-3xl pointer-events-none"></div>
-            <SectionTitle title="4. Features" subtitle="Special toggles for this store" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {Object.entries(form.features).map(([key, val]) => (
-                <label key={key} className="flex items-center gap-3 cursor-pointer p-3 rounded-xl bg-gray-700/40 border border-gray-600/50">
-                  <div onClick={() => set(`features.${key}`, !val)} className={`w-9 h-5 rounded-full transition-colors relative ${val ? 'bg-purple-600' : 'bg-gray-600'}`}>
-                    <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${val ? 'translate-x-4' : 'translate-x-0.5'}`} />
-                  </div>
-                  <div>
-                    <span className={`text-sm font-medium capitalize ${val ? 'text-white' : 'text-gray-500'}`}>{key.replace(/([A-Z])/g, ' $1')}</span>
-                  </div>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* DELIVERY PARTNERS */}
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl pointer-events-none"></div>
-            <SectionTitle title="5. Delivery Partners" subtitle="Configure which couriers are active for this store" />
-            <div className="space-y-3">
-              {form.deliveryPartners.map((dp, i) => (
-                <div key={i} className="flex items-center gap-3 bg-gray-700/40 rounded-xl p-3">
-                  <div onClick={() => updatePartner(i, 'isEnabled', !dp.isEnabled)} className={`w-9 h-5 rounded-full transition-colors relative flex-shrink-0 cursor-pointer ${dp.isEnabled ? 'bg-purple-600' : 'bg-gray-600'}`}>
-                    <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${dp.isEnabled ? 'translate-x-4' : 'translate-x-0.5'}`} />
-                  </div>
-                  <div className="flex-1">
-                    <select value={dp.name} onChange={e => updatePartner(i, 'name', e.target.value)} className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-1.5 text-sm mb-2">
-                      {DELIVERY_PARTNERS.map(p => <option key={p} value={p}>{p}</option>)}
-                    </select>
-                    <div className="flex gap-2">
-                      <input type="password" value={dp.config?.webhook_secret || ''} onChange={e => updatePartner(i, 'config', { ...dp.config, webhook_secret: e.target.value })} placeholder="Webhook Secret" className="flex-1 bg-gray-800 border border-gray-600 text-white rounded-lg px-3 py-1.5 text-xs placeholder-gray-500" />
-                      <input type="password" value={dp.config?.webhook_token || ''} onChange={e => updatePartner(i, 'config', { ...dp.config, webhook_token: e.target.value })} placeholder="Webhook Token" className="flex-1 bg-gray-800 border border-gray-600 text-white rounded-lg px-3 py-1.5 text-xs placeholder-gray-500" />
-                    </div>
-                  </div>
-                  <button type="button" onClick={() => removePartner(i)} className="text-red-400 hover:text-red-300 ml-auto self-start mt-2"><Trash2 size={14} /></button>
-                </div>
-              ))}
-              <button type="button" onClick={addPartner} className="text-purple-400 hover:text-purple-300 text-sm flex items-center gap-1">
-                <Plus size={13} /> Add Partner
-              </button>
-            </div>
-          </div>
-
           {/* CREDENTIALS */}
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
-            <SectionTitle title="6. API Credentials" subtitle="Payment, SMS, media, and email integrations" />
+            <SectionTitle title="3. API Credentials" subtitle="Payment, SMS, media, and email integrations" />
             <div className="space-y-6">
               <div>
                 <p className="text-xs uppercase text-gray-500 mb-3 font-semibold tracking-wider">Razorpay</p>
@@ -282,7 +220,7 @@ const OnboardTenant = () => {
           {/* THEME */}
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-500/5 rounded-full blur-3xl pointer-events-none"></div>
-            <SectionTitle title="7. Theme" subtitle="Store's brand colors and logo" />
+            <SectionTitle title="4. Theme" subtitle="Store's brand colors and logo" />
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <label className="block text-xs text-gray-400 mb-1">Primary Color</label>
